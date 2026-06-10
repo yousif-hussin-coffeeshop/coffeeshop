@@ -13,14 +13,18 @@ const ALLOWED_ORIGINS = [
   'http://127.0.0.1:8000',
 ];
 
-// Free models, tried in order. Free model IDs rotate over time —
-// check https://openrouter.ai/models?max_price=0 and update if needed.
-// (Note: 'google/gemini-1.5-flash:free' does NOT exist on OpenRouter —
-//  gemini-2.0-flash-exp:free is the available free Gemini, verified 2026-06.)
+// Free models, tried in order. ⚠️ Free model IDs rotate FAST on OpenRouter —
+// models get retired or moved to paid-only with no notice (a removed model
+// returns 404, a saturated one returns 429). If chat starts failing, refresh
+// this list from https://openrouter.ai/models?max_price=0 and redeploy.
+// Spread across different providers so one provider's rate-limit doesn't kill
+// everything. Qwen first — strong Arabic. Verified available 2026-06-10.
 const MODELS = [
-  'google/gemini-2.0-flash-exp:free',
+  'qwen/qwen3-next-80b-a3b-instruct:free',
+  'meta-llama/llama-3.3-70b-instruct:free',
+  'google/gemma-4-31b-it:free',
+  'openai/gpt-oss-120b:free',
   'meta-llama/llama-3.2-3b-instruct:free',
-  'google/gemma-3-27b-it:free',
 ];
 
 const OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions';
