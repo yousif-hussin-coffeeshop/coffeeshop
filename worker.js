@@ -20,6 +20,7 @@ const ALLOWED_ORIGINS = [
 const MODELS = [
   'google/gemini-2.0-flash-exp:free',
   'meta-llama/llama-3.2-3b-instruct:free',
+  'google/gemma-3-27b-it:free',
 ];
 
 const OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions';
@@ -91,7 +92,7 @@ function sanitizeHistory(history) {
 }
 
 async function askOpenRouter(messages, env, origin) {
-  let lastError = 'No model responded';
+  const errors = [];
 
   for (const model of MODELS) {
     try {
@@ -113,7 +114,10 @@ async function askOpenRouter(messages, env, origin) {
       });
 
       if (!res.ok) {
-        lastError = `Model ${model} returned HTTP ${res.status}`;
+        // Keep a snippet of the upstream body — it says WHY (rate limit,
+        // bad key, retired model...), not just the status code
+        const body = (await res.text().catch(() => '')).slice(0, 200);
+        errors.push(`${model}: HTTP ${res.status}${body ? ` ${body}` : ''}`);
         continue; // try the next (fallback) model
       }
 
@@ -126,13 +130,13 @@ async function askOpenRouter(messages, env, origin) {
         data.choices[0].message.content;
 
       if (reply && reply.trim()) return { reply: reply.trim() };
-      lastError = `Model ${model} returned an empty reply`;
+      errors.push(`${model}: empty reply`);
     } catch (err) {
-      lastError = `Model ${model} failed: ${err.message}`;
+      errors.push(`${model}: ${err.message}`);
     }
   }
 
-  return { error: lastError };
+  return { error: errors.join(' | ') || 'No model responded' };
 }
 
 export default {
