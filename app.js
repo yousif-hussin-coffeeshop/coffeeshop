@@ -5,7 +5,7 @@
  * ============================================================ */
 
 // ⚠️ Replace with your deployed Cloudflare Worker URL (see README.md)
-const PROXY_URL = 'YOUR_CLOUDFLARE_WORKER_URL_HERE';
+const PROXY_URL = 'https://coffeeshop-proxy.yousifhussincoffeeshop.workers.dev';
 
 // Used only when content.json can't be fetched — e.g. opening index.html
 // directly from disk (file://) where browsers block fetch, or a JSON syntax
