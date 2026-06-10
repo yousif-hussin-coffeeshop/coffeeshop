@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>بُن البلد | قهوة طازة من قلب الحي</title>
+  <meta name="description" content="قهوة محلية، بن طازة محمص يومياً، وقعدة حلوة في قلب الحي." />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream:    '#FBF5EC',
+            latte:    '#EAD9C2',
+            caramel:  '#C68B59',
+            mocha:    '#8B5E3C',
+            espresso: '#4B2E1E',
+            roast:    '#2E1A0F'
+          },
+          fontFamily: {
+            cairo: ['Cairo', 'Tahoma', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Arabic font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet" />
+
+  <style>
+    html { scroll-behavior: smooth; }
+    /* Subtle steam animation for the hero coffee cup */
+    @keyframes steam {
+      0%   { transform: translateY(0) scaleX(1);   opacity: .0; }
+      30%  { opacity: .6; }
+      100% { transform: translateY(-14px) scaleX(1.4); opacity: 0; }
+    }
+    .steam-line { animation: steam 2.6s ease-out infinite; transform-origin: center; }
+    .steam-line:nth-child(2) { animation-delay: .8s; }
+    .steam-line:nth-child(3) { animation-delay: 1.6s; }
+    /* Chat scrollbar */
+    #chat-messages::-webkit-scrollbar { width: 6px; }
+    #chat-messages::-webkit-scrollbar-thumb { background: #C68B59; border-radius: 9999px; }
+  </style>
+</head>
+
+<body class="font-cairo bg-cream text-roast antialiased">
+
+  <!-- ===== Header ===== -->
+  <header class="sticky top-0 z-40 bg-cream/90 backdrop-blur border-b border-latte">
+    <nav class="max-w-5xl mx-auto flex items-center justify-between px-4 py-3">
+      <a href="#" class="flex items-center gap-2 text-xl font-black text-espresso">
+        <span aria-hidden="true">☕</span>
+        <span id="nav-shop-name">بُن البلد</span>
+      </a>
+      <ul class="hidden sm:flex items-center gap-6 text-sm font-semibold text-mocha">
+        <li><a href="#menu" class="hover:text-espresso transition">المنيو</a></li>
+        <li><a href="#contact" class="hover:text-espresso transition">اتصل بينا</a></li>
+      </ul>
+      <a href="#contact"
+         class="bg-espresso text-cream text-sm font-bold px-4 py-2 rounded-full hover:bg-roast transition shadow">
+        اطلب دلوقتي
+      </a>
+    </nav>
+  </header>
+
+  <!-- ===== Hero ===== -->
+  <section class="relative overflow-hidden">
+    <div class="max-w-5xl mx-auto px-4 py-16 sm:py-24 grid md:grid-cols-2 gap-10 items-center">
+      <div class="text-center md:text-start">
+        <p class="inline-block bg-latte text-mocha text-sm font-bold px-4 py-1 rounded-full mb-4">
+          محمصة وقهوة محلية
+        </p>
+        <h1 id="hero-title" class="text-4xl sm:text-5xl font-black text-espresso leading-snug mb-4">قهوتك على مزاجك.. زي زمان</h1>
+        <p id="hero-subtitle" class="text-lg text-mocha leading-relaxed mb-8">بن طازة بنحمّصه يومياً، وقعدة بتجمعك بأحلى الناس. من قلب الحي وليك.</p>
+        <div class="flex flex-wrap justify-center md:justify-start gap-3">
+          <a href="#menu"
+             class="bg-caramel text-white font-bold px-6 py-3 rounded-full hover:bg-mocha transition shadow-lg">
+            شوف المنيو
+          </a>
+          <a id="hero-order-btn" href="#contact"
+             class="border-2 border-espresso text-espresso font-bold px-6 py-3 rounded-full hover:bg-espresso hover:text-cream transition">
+            كلمنا واطلب
+          </a>
+        </div>
+      </div>
+
+      <!-- Elegant coffee image placeholder (pure SVG, no external assets) -->
+      <div class="flex justify-center" aria-hidden="true">
+        <div class="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full bg-gradient-to-br from-latte via-cream to-caramel/40 shadow-inner flex items-center justify-center">
+          <div class="absolute inset-4 rounded-full border-2 border-dashed border-caramel/50"></div>
+          <svg viewBox="0 0 200 200" class="w-40 h-40 sm:w-52 sm:h-52 drop-shadow-lg">
+            <!-- steam -->
+            <g stroke="#8B5E3C" stroke-width="5" stroke-linecap="round" fill="none">
+              <path class="steam-line" d="M80 52 q-6 -12 0 -22" />
+              <path class="steam-line" d="M100 48 q-6 -12 0 -24" />
+              <path class="steam-line" d="M120 52 q-6 -12 0 -22" />
+            </g>
+            <!-- cup -->
+            <path d="M55 80 h90 v34 a45 45 0 0 1 -90 0 z" fill="#4B2E1E" />
+            <path d="M55 80 h90 v10 a45 14 0 0 1 -90 0 z" fill="#C68B59" opacity="0.85" />
+            <!-- handle -->
+            <path d="M145 88 q26 4 18 26 q-7 18 -22 14" fill="none" stroke="#4B2E1E" stroke-width="9" stroke-linecap="round" />
+            <!-- saucer -->
+            <ellipse cx="100" cy="166" rx="62" ry="10" fill="#8B5E3C" opacity="0.5" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Menu ===== -->
+  <section id="menu" class="bg-white/60 border-y border-latte">
+    <div class="max-w-5xl mx-auto px-4 py-16">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-black text-espresso mb-2">المنيو</h2>
+        <p class="text-mocha">كل حاجة بتتعمل طازة في وقتها</p>
+      </div>
+      <!-- Populated dynamically from content.json by app.js -->
+      <div id="menu-grid">
+        <p class="text-center text-mocha animate-pulse">جاري تحميل المنيو...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Contact / Order ===== -->
+  <section id="contact" class="max-w-5xl mx-auto px-4 py-16 text-center">
+    <h2 class="text-3xl font-black text-espresso mb-3">عايز تطلب أو تسأل؟</h2>
+    <p class="text-mocha mb-8">كلمنا على طول، أو عدّي علينا واشرب قهوتك في حتة تريح القلب.</p>
+
+    <div class="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto mb-10">
+      <div class="bg-white border border-latte rounded-2xl p-6 shadow-sm">
+        <p class="text-sm font-bold text-caramel mb-1">التليفون</p>
+        <a id="contact-phone" href="tel:+201002345678" dir="ltr" class="text-lg font-black text-espresso hover:text-caramel transition">+20 100 234 5678</a>
+      </div>
+      <div class="bg-white border border-latte rounded-2xl p-6 shadow-sm">
+        <p class="text-sm font-bold text-caramel mb-1">العنوان</p>
+        <p id="contact-address" class="text-lg font-black text-espresso">15 شارع النيل، الدقي، الجيزة</p>
+      </div>
+    </div>
+
+    <a id="order-btn" href="tel:+201002345678"
+       class="inline-block bg-espresso text-cream text-xl font-black px-10 py-4 rounded-full hover:bg-roast transition shadow-xl">
+      📞 اطلب دلوقتي
+    </a>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="bg-roast text-latte text-center py-6 text-sm">
+    <p>© <span id="footer-year"></span> <span id="footer-shop-name">بُن البلد</span> — كل الحقوق محفوظة</p>
+  </footer>
+
+  <!-- ===== Floating Chatbot Widget ===== -->
+  <!-- Toggle button (bottom corner) -->
+  <button id="chat-toggle" type="button" aria-label="افتح المحادثة" aria-expanded="false"
+          class="fixed bottom-5 left-5 z-50 w-14 h-14 rounded-full bg-caramel text-white text-2xl shadow-2xl hover:bg-mocha hover:scale-105 transition flex items-center justify-center">
+    💬
+  </button>
+
+  <!-- Chat window -->
+  <!-- Fixed size: the window never grows with messages; the messages area scrolls internally -->
+  <div id="chat-window"
+       class="hidden fixed bottom-24 left-5 z-50 w-[calc(100vw-2.5rem)] sm:w-96 h-[30rem] max-h-[75vh] bg-white rounded-2xl shadow-2xl border border-latte flex-col overflow-hidden">
+    <!-- Header -->
+    <div class="bg-espresso text-cream px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="text-xl" aria-hidden="true">☕</span>
+        <div>
+          <p class="font-bold text-sm" id="chat-shop-name">مساعد القهوة</p>
+          <p class="text-xs text-latte">بيرد عليك في ثواني</p>
+        </div>
+      </div>
+      <button id="chat-close" type="button" aria-label="اقفل المحادثة"
+              class="text-latte hover:text-white text-2xl leading-none px-1">&times;</button>
+    </div>
+
+    <!-- Messages -->
+    <div id="chat-messages" class="flex-1 min-h-0 overflow-y-auto p-4 space-y-3 bg-cream/50">
+      <!-- Native Arabic welcome message -->
+      <div class="flex justify-start">
+        <div class="bg-white border border-latte text-roast rounded-2xl rounded-br-sm px-4 py-2 max-w-[85%] text-sm leading-relaxed shadow-sm">
+          أهلاً بيك! إزاي أقدر أساعدك النهاردة؟
+        </div>
+      </div>
+    </div>
+
+    <!-- Input -->
+    <form id="chat-form" class="flex items-center gap-2 p-3 border-t border-latte bg-white">
+      <input id="chat-input" type="text" autocomplete="off" maxlength="500"
+             placeholder="اكتب سؤالك هنا..."
+             class="flex-1 bg-cream border border-latte rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-caramel" />
+      <button id="chat-send" type="submit" aria-label="ابعت الرسالة"
+              class="bg-caramel text-white w-10 h-10 rounded-full hover:bg-mocha transition flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed shrink-0">
+        <!-- send arrow (points left = forward in RTL) -->
+        <svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor" aria-hidden="true">
+          <path d="M21 12 3 4l3.5 8L3 20z" transform="scale(-1,1) translate(-24,0)" />
+        </svg>
+      </button>
+    </form>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
